@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.24.2)
 project(WebAssemblyInterface)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 
 if(POLICY CMP0135)
   cmake_policy(SET CMP0135 NEW)
@@ -93,8 +93,8 @@ FetchContent_Declare(
 )
 
 set(glaze_GIT_REPOSITORY "https://github.com/stephenberry/glaze")
-# glaze v2.9.5
-set(glaze_GIT_TAG 7c298ef6c403c505cf6291b686e32d943f1fb102)
+# glaze v5.1.0 - first version with escape_control_characters
+set(glaze_GIT_TAG v5.1.0)
 FetchContent_Declare(
   glaze
   GIT_REPOSITORY ${glaze_GIT_REPOSITORY}
@@ -107,8 +107,6 @@ if (MSVC)
     # for a C++ standards compliant preprocessor, not needed for clang-cl
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:preprocessor /permissive- /Zc:lambda")
   endif()
-  # avoid warnings
-  set(CMAKE_CXX_STANDARD 23)
 endif()
 
 list(APPEND CMAKE_MODULE_PATH ${libcbor_SOURCE_DIR}/CMakeModules)
