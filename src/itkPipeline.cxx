@@ -391,7 +391,7 @@ Pipeline ::interface_json()
   }
 
   std::string serialized{};
-  auto        ec = glz::write<glz::opts{ .prettify = true, .concatenate = false }>(interfaceJSON, serialized);
+  auto        ec = glz::write<glz::opts{ .prettify = true }>(interfaceJSON, serialized);
   if (ec)
   {
     const std::string descriptiveError = glz::format_error(ec, serialized);

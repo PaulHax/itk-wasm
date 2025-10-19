@@ -12,3 +12,4 @@ packages:
   - '!**/src'
   - '!**/dist'
   - '!**/pyodide'
+  - '!**/native/**'
