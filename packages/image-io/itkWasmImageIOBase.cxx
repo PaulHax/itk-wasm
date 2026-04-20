@@ -88,8 +88,13 @@ WasmImageIOBase::SetImageIO(ImageIOBase * imageIO, bool readImage)
   dataStream << pixelDataAddress;
   imageJSON.data = dataStream.str();
 
+  struct write_opts : glz::opts {
+    bool prettify = true;
+    bool escape_control_characters = true;
+  };
+
   std::string serialized{};
-  auto        ec = glz::write<glz::opts{ .prettify = true }>(imageJSON, serialized);
+  auto        ec = glz::write<write_opts{}>(imageJSON, serialized);
   if (ec)
   {
     itkExceptionMacro("Failed to serialize ImageJSON");

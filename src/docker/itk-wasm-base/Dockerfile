@@ -60,6 +60,9 @@ RUN . /itk_wasm_env_vars.sh && sed -i -e "/^set(DCMTK_GIT_REPOSITORY/c\set(DCMTK
 RUN . /itk_wasm_env_vars.sh && sed -i -e "/^set(DCMTK_GIT_TAG/c\set(DCMTK_GIT_TAG \"${ITK_WASM_DCMTK_GIT_TAG}\")" \
     /ITK/Modules/ThirdParty/DCMTK/DCMTKGitTag.cmake
 
+RUN sed -i -e "s/set(VALID_CXX_STANDARDS \"11\" \"14\" \"17\" \"20\")/set(VALID_CXX_STANDARDS \"11\" \"14\" \"17\" \"20\" \"23\")/" \
+    /ITK/Modules/ThirdParty/VNL/src/vxl/CMakeLists.txt
+
 ARG CMAKE_BUILD_TYPE=Release
 
 ARG LDFLAGS="-flto -s ALLOW_MEMORY_GROWTH=1 -s MAXIMUM_MEMORY=4GB"
@@ -73,7 +76,7 @@ RUN mkdir ITK-build && \
   cmake \
     -G Ninja \
     -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} \
-    -DCMAKE_CXX_STANDARD:STRING=20 \
+    -DCMAKE_CXX_STANDARD:STRING=23 \
     -DCMAKE_INSTALL_PREFIX:PATH=/usr \
     -DCMAKE_BUILD_TYPE:STRING=$CMAKE_BUILD_TYPE \
     -DBUILD_EXAMPLES:BOOL=OFF \
@@ -122,7 +125,7 @@ RUN git clone https://github.com/InsightSoftwareConsortium/ITKMeshToPolyData.git
   cmake \
     -G Ninja \
     -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} \
-    -DCMAKE_CXX_STANDARD:STRING=20 \
+    -DCMAKE_CXX_STANDARD:STRING=23 \
     -DCMAKE_INSTALL_PREFIX:PATH=/usr \
     -DCMAKE_BUILD_TYPE:STRING=$CMAKE_BUILD_TYPE \
     -DBUILD_TESTING:BOOL=OFF \

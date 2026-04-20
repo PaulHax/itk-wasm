@@ -1,8 +1,8 @@
 # Override the default set in the Emscripten toolchain (11) to be compatible
 # with ITK's requirement for C++17 or newer.
 # C++17 for string_view support
-# C++20 for glaze support
-set(CMAKE_CXX_STANDARD_COMPUTED_DEFAULT 20)
+# C++23 for glaze v5+ support
+set(CMAKE_CXX_STANDARD_COMPUTED_DEFAULT 23)
 
 # Not compatible
 set(CMAKE_DISABLE_FIND_PACKAGE_OpenMP TRUE)
