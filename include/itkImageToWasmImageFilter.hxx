@@ -130,7 +130,7 @@ ImageToWasmImageFilter<TImage>::GenerateData()
   constexpr bool  inMemory = true;
   const ImageJSON imageJSON = imageToImageJSON<ImageType>(image, wasmImage, inMemory);
   std::string     serialized{};
-  auto            ec = glz::write<glz::opts{ .prettify = true, .concatenate = false }>(imageJSON, serialized);
+  auto            ec = glz::write<glz::opts{ .prettify = true }>(imageJSON, serialized);
   if (ec)
   {
     itkExceptionMacro("Failed to serialize ImageJSON");
